@@ -4,11 +4,15 @@ const cors = require('cors')
 const mongoose = require('mongoose')
 const path = require('path')
 
+const reproductionsRoutes = require('./routes/reproductions-routes')
+
 const app = express()
 
 app.use(cors)
 app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
+
+app.use(reproductionsRoutes)
 
 const { DB_HOST, DB_PORT, DB_NAME } = process.env
 
