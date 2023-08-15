@@ -33,6 +33,6 @@ const ReproductionSchema = new Schema({
 	},
 })
 
-const Reproduction = mongoose.model('Reproudction', ReproductionSchema)
+const Reproduction = mongoose.model('Reproduction', ReproductionSchema)
 
 module.exports = Reproduction

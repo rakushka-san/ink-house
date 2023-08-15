@@ -9,6 +9,9 @@ const getReproductions = (req, res) => {
 	const country = req.query.country
 	const year = req.query.year
 
+	if (country) filter.country = country
+	if (year) filter.year = year
+
 	Reproduction.find(filter)
 		.limit(limit ? limit : 0)
 		.skip(skip ? skip : 0)
@@ -44,7 +47,7 @@ const deleteReproduction = (req, res) => {
 }
 
 const updateReproduciton = (req, res) => {
-	Reproduction.findByIdAndUpdate(req.params.id)
+	Reproduction.findByIdAndUpdate(req.params.id, req.body)
 		.then(result => {
 			res.status(200).json(result)
 		})
