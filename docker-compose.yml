@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  mongo:
+    container_name: ink-house-db
+    image: mongo
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      MONGO_INITDB_DATABASE: $DB_NAME
+    ports:
+      - $DB_PORT_LOCAL:$DB_PORT
+    volumes:
+      - db:/data/db
+
+  back:
+    container_name: ink-house-back
+    depends_on:
+      - mongo
+    build: ./Ink. House Back/.
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $LOCAL_PORT:$PORT
+    environment:
+      - PORT = $PORT
+      - DB_HOST = $DB_HOST
+      - DB_PORT = $DB_PORT
+      - DB_NAME = $DB_NAME
+
+volumes:
+  db:
