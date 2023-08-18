@@ -16,7 +16,7 @@ services:
     container_name: ink-house-back
     depends_on:
       - mongo
-    build: ./Ink. House Back/.
+    build: ./ink-house-back/.
     restart: unless-stopped
     env_file: ./.env
     ports:
