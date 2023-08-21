@@ -1,3 +1,6 @@
+@import 'fonts';
+@import 'colors';
+
 *,
 *::before,
 *::after {
@@ -8,4 +11,10 @@
 
 html {
   font-size: 16px;
+}
+
+body {
+  color: $colorBlack;
+  font-family: Raleway;
+  font-weight: 500;
 }
