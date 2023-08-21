@@ -1,0 +1,58 @@
+@import 'variables';
+@import 'mixins';
+
+.container {
+  @include container;
+}
+
+.row {
+  @include row;
+}
+
+.col {
+  flex: 1 0 0%;
+}
+
+@each $bp, $width in $breakpoints {
+  @include media($width) {
+    @for $i from 1 through $columns {
+      .col-#{$bp}-#{$i} {
+        @include col($i);
+      }
+    }
+  }
+}
+
+@each $bp, $width in $breakpoints {
+  @include media($width) {
+    .hidden-#{$bp} {
+      @include hidden;
+    }
+
+    .visible-#{$bp} {
+      @include visible;
+    }
+
+    .start-#{$bp} {
+      @include start;
+    }
+
+    .center-#{$bp} {
+      @include center;
+    }
+
+    .end-#{$bp} {
+      @include end;
+    }
+
+    .top-#{$bp} {
+      @include top;
+    }
+    .middle-#{$bp} {
+      @include middle;
+    }
+    .bottom-#{$bp} {
+      @include bottom;
+    }
+  }
+}

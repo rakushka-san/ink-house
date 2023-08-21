@@ -1,0 +1,14 @@
+$maxContainerWidth: 1140px;
+
+$columns: 12;
+
+$gutter: 30px;
+
+$breakpoints: (
+  xs: 0px,
+  sm: 510px,
+  md: 690px,
+  lg: 1440px
+);
+
+$halfGutter: calc($gutter / 2);
