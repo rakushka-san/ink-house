@@ -9,6 +9,10 @@
   box-sizing: border-box;
 }
 
+*:focus {
+  outline: none;
+}
+
 html {
   font-size: 16px;
 }
@@ -17,4 +21,26 @@ body {
   color: $colorBlack;
   font-family: Raleway;
   font-weight: 500;
+}
+
+.primary-btn {
+  font-size: 1.125rem;
+  color: $colorAccent;
+  border: 1px solid $colorAccent;
+  background-color: $colorAbsoluteWhite;
+
+  &:hover {
+    color: $colorWhite;
+    background-color: $colorAccent;
+  }
+
+  &:focus {
+    background-color: $colorSecondary;
+  }
+
+  &:active {
+    color: $colorAbsoluteWhite;
+    border: 1px solid $colorDark;
+    background-color: $colorDark;
+  }
 }
