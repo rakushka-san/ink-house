@@ -9,7 +9,8 @@
 @mixin row {
   display: flex;
   flex-wrap: wrap;
-  margin: 0 - $halfGutter;
+  // margin-left: -$halfGutter;
+  // margin-right: -$halfGutter;
 
   > * {
     margin: 0 $halfGutter;
@@ -43,6 +44,14 @@
 
 @mixin end() {
   justify-content: flex-end;
+}
+
+@mixin between() {
+  justify-content: space-between;
+}
+
+@mixin around() {
+  justify-content: space-around;
 }
 
 @mixin top() {

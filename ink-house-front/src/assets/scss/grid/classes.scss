@@ -45,6 +45,14 @@
       @include end;
     }
 
+    .between-#{$bp} {
+      @include between;
+    }
+
+    .around-#{$bp} {
+      @include around;
+    }
+
     .top-#{$bp} {
       @include top;
     }
