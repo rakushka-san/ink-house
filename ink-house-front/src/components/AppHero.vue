@@ -1,18 +1,20 @@
 <template>
-  <section class="container">
-    <div class="row middle-xs">
-      <img
-        src="./../assets/img/bird.jpg"
-        alt="Bird image"
-        class="col-sm-5 col-md-6 hidden-xs visible-sm"
-      />
-      <div class="col-xs-12 col-sm-7 col-md-6">
-        <h1>Реплики картин от <span>Ink. House</span></h1>
-        <p>
-          Высокое качество отрисовки на плотной бумаге или льняном холсте. Редкие произведения,
-          доступные цены.
-        </p>
-        <button class="primary-btn">Продукция</button>
+  <section>
+    <div class="container">
+      <div class="row middle-xs">
+        <img
+          src="./../assets/img/bird.jpg"
+          alt="Bird image"
+          class="col-sm-5 col-md-6 hidden-xs visible-sm"
+        />
+        <div class="col-xs-12 col-sm-7 col-md-6">
+          <h1>Реплики картин от <span>Ink. House</span></h1>
+          <p>
+            Высокое качество отрисовки на плотной бумаге или льняном холсте. Редкие произведения,
+            доступные цены.
+          </p>
+          <button class="primary-btn">Продукция</button>
+        </div>
       </div>
     </div>
   </section>
@@ -23,10 +25,10 @@
 @import './../assets/scss/grid/mixins';
 
 section {
-  padding: 3.75rem 0;
+  padding-top: 3.75rem;
 
   @include bp(sm) {
-    padding: 3.13rem 0;
+    padding-top: 3.13rem 0;
   }
 
   @include bp(md) {

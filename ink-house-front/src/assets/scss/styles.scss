@@ -27,7 +27,7 @@ body {
   font-size: 1.125rem;
   color: $colorAccent;
   border: 1px solid $colorAccent;
-  background-color: $colorAbsoluteWhite;
+  background-color: transparent;
 
   &:hover {
     color: $colorWhite;
@@ -42,5 +42,30 @@ body {
     color: $colorAbsoluteWhite;
     border: 1px solid $colorDark;
     background-color: $colorDark;
+  }
+}
+
+.tab-btn {
+  font-size: 1.125rem;
+  padding: 0.62rem 1.25rem;
+  color: $colorBlack;
+  background-color: $colorSecondary;
+  border-radius: 1.25rem;
+  border: 1px solid $colorSecondary;
+
+  &:hover {
+    color: $colorWhite;
+    background-color: $colorAccent;
+    border: 1px solid $colorAccent;
+  }
+
+  &:focus {
+    border: 1px solid $colorAccent;
+  }
+
+  &.active {
+    color: $colorWhite;
+    background-color: $colorDark;
+    border: 1px solid $colorDark;
   }
 }
