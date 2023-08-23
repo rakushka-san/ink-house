@@ -95,6 +95,10 @@ body {
 a {
   color: $colorBlack;
   text-decoration: none;
+
+  &.silent {
+    color: $colorSilent;
+  }
   &:hover {
     color: $colorAccent;
   }
@@ -106,4 +110,14 @@ a {
   &:active {
     color: $colorDark;
   }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+h7 {
+  font-weight: 500;
 }
