@@ -4,10 +4,7 @@
       <div class="top">
         <div class="container">
           <div class="row middle-xs center-xs">
-            <div class="logo">
-              <img src="./../assets/img/logo.svg" alt="Logo" />
-              <span>Ink. House</span>
-            </div>
+            <AppLogo />
           </div>
         </div>
       </div>
@@ -42,10 +39,7 @@
     <header>
       <div class="container">
         <div class="row middle-xs center-xs">
-          <div class="logo">
-            <img src="./../assets/img/logo.svg" alt="Logo" />
-            <span>Ink. House</span>
-          </div>
+          <AppLogo />
         </div>
         <nav class="row between-xs middle-xs">
           <div class="col-sm-10">
@@ -68,10 +62,7 @@
       <div class="container">
         <div class="row between-md middle-md">
           <div class="col-md-3 col-lg-2">
-            <div class="logo">
-              <img src="./../assets/img/logo.svg" alt="Logo" />
-              <span>Ink. House</span>
-            </div>
+            <AppLogo />
           </div>
           <nav class="col-md-9 col-lg-6">
             <a href="#">Репродукции</a>
@@ -88,6 +79,7 @@
 </template>
 
 <script setup lang="ts">
+import AppLogo from './AppLogo.vue'
 import { ref } from 'vue'
 
 const isMenuVisible = ref(false)
@@ -136,18 +128,6 @@ header {
     nav {
       border-top: none;
     }
-  }
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-
-  span {
-    margin-left: 0.5rem;
-    color: $colorAccent;
-    font-size: 1.25rem;
-    font-weight: 700;
   }
 }
 
