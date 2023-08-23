@@ -91,3 +91,19 @@ body {
     border: 1px solid $colorPromoSecondary;
   }
 }
+
+a {
+  color: $colorBlack;
+  text-decoration: none;
+  &:hover {
+    color: $colorAccent;
+  }
+
+  &:focus {
+    background-color: $colorSecondary;
+  }
+
+  &:active {
+    color: $colorDark;
+  }
+}

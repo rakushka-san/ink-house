@@ -133,8 +133,6 @@ header {
 
 nav {
   a {
-    color: $colorBlack;
-    text-decoration: none;
     font-size: 1.125rem;
 
     @include bp(lg) {
