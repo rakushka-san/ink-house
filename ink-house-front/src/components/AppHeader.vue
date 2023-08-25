@@ -15,7 +15,8 @@
             <img src="./../assets/img/list.svg" alt="Menu" @click="openMenu" />
           </div>
           <div class="col-xs-6 cart">
-            <img src="./../assets/img/shopping-cart.svg" alt="Cart" />
+            <AppCart :items-in-cart="itemsInCart" />
+            <!-- <img src="./../assets/img/shopping-cart.svg" alt="Cart" /> -->
           </div>
         </div>
       </div>
@@ -49,7 +50,8 @@
           </div>
           <div class="col-sm-2 cart">
             <a href="#">
-              <img src="./../assets/img/shopping-cart.svg" alt="Cart" />
+              <AppCart :items-in-cart="itemsInCart" />
+              <!-- <img src="./../assets/img/shopping-cart.svg" alt="Cart" /> -->
             </a>
           </div>
         </nav>
@@ -69,7 +71,8 @@
             <a href="#">Новинки</a>
             <a href="#">О нас</a>
             <a href="#">
-              <img src="./../assets/img/shopping-cart.svg" alt="Cart" />
+              <AppCart :items-in-cart="itemsInCart" />
+              <!-- <img src="./../assets/img/shopping-cart.svg" alt="Cart" /> -->
             </a>
           </nav>
         </div>
@@ -80,7 +83,14 @@
 
 <script setup lang="ts">
 import AppLogo from './AppLogo.vue'
+import AppCart from './AppCart.vue'
 import { ref } from 'vue'
+
+interface Props {
+  itemsInCart: number
+}
+
+defineProps<Props>()
 
 const isMenuVisible = ref(false)
 

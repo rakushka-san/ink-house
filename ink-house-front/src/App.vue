@@ -1,5 +1,5 @@
 <template>
-  <AppHeader />
+  <AppHeader :items-in-cart="itemsInCart" />
   <main>
     <AppHero />
     <AppReproductions />
@@ -16,6 +16,9 @@ import AppReproductions from './components/AppReproductions.vue'
 import AppNews from './components/AppNews.vue'
 import AppTeam from './components/AppTeam.vue'
 import AppFooter from './components/AppFooter.vue'
+import { ref } from 'vue'
+
+const itemsInCart = ref(0)
 </script>
 
 <style lang="scss"></style>
