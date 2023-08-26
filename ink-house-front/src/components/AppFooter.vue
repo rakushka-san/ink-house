@@ -30,8 +30,16 @@
           <div class="years column col-xs-7 col-sm-4 col-md-3">
             <div>
               <h4>Новинки</h4>
-              <a href="#" class="silent">2021</a>
-              <a href="#" class="silent">2020</a>
+              <a
+                href="#"
+                class="silent"
+                v-for="year in years"
+                :key="year"
+                @click.prevent="selectYear(year)"
+                >{{ year }}</a
+              >
+              <!-- <a href="#" class="silent">2021</a>
+              <a href="#" class="silent">2020</a> -->
             </div>
           </div>
           <div class="team column col-xs-5 col-sm-4 col-md-3">
