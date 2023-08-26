@@ -19,7 +19,7 @@ const getReproductions = (req, res) => {
 			res.status(200).json(reproductions)
 		})
 		.catch(err => {
-			res.status(500).json(error)
+			res.status(500).json(err)
 		})
 }
 
@@ -62,7 +62,17 @@ const getCountries = (req, res) => {
 			res.status(200).json(countries)
 		})
 		.catch(err => {
-			res.status(500).json(error)
+			res.status(500).json(err)
+		})
+}
+
+const getYears = (req, res) => {
+	Reproduction.distinct('year')
+		.then(years => {
+			res.status(200).json(years)
+		})
+		.catch(err => {
+			res.status(500).json(err)
 		})
 }
 
@@ -72,4 +82,5 @@ module.exports = {
 	deleteReproduction,
 	updateReproduciton,
 	getCountries,
+	getYears,
 }
