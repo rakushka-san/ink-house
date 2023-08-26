@@ -1,13 +1,25 @@
 <template>
   <div class="card">
-    <img src="./../assets/img/reproduction-placeholder.jpeg" alt="Reproduction image" />
-    <p class="author">Марсель Руссо</p>
-    <h3 class="name">Охота Амура</h3>
-    <p class="properties">Холст, масло (50х80)</p>
-    <p class="price">14500 руб</p>
+    <img :src="API_URL + reproduction.imgSrc" alt="Reproduction image" />
+    <p class="author">{{ reproduction.author }}</p>
+    <h3 class="name">{{ reproduction.name }}</h3>
+    <p class="properties">{{ reproduction.properties }}</p>
+    <p class="price">{{ reproduction.price }} руб</p>
     <button class="primary-btn">В корзину</button>
   </div>
 </template>
+
+<script setup lang="ts">
+import type { IReproduction } from '@/models/Reproduction'
+
+interface Props {
+  reproduction: IReproduction
+}
+
+defineProps<Props>()
+
+const API_URL = import.meta.env.VITE_API_URL
+</script>
 
 <style lang="scss" scoped>
 @import './../assets/scss/colors';

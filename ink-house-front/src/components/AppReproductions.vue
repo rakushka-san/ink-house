@@ -5,30 +5,25 @@
         <h2 class="col-xs-12 col-md-4">Репродукции</h2>
         <div class="col-xs-12 col-md-8 col-lg-5">
           <div class="filters">
-            <button class="tab-btn active">Франция</button>
+            <button
+              v-for="country in countries"
+              :key="country"
+              class="tab-btn"
+              :class="{ active: activeCountry === country }"
+              @click="selectCountry(country)"
+            >
+              {{ country }}
+            </button>
+
+            <!-- <button class="tab-btn active">Франция</button>
             <button class="tab-btn">Германия</button>
-            <button class="tab-btn">Англия</button>
+            <button class="tab-btn">Англия</button> -->
           </div>
         </div>
       </header>
       <div class="row reproductions">
-        <div class="col-xs-12 col-sm-6 col-lg-4">
-          <AppReproduction />
-        </div>
-        <div class="col-xs-12 col-sm-6 col-lg-4">
-          <AppReproduction />
-        </div>
-        <div class="col-xs-12 col-sm-6 col-lg-4">
-          <AppReproduction />
-        </div>
-        <div class="col-xs-12 col-sm-6 col-lg-4">
-          <AppReproduction />
-        </div>
-        <div class="col-xs-12 col-sm-6 col-lg-4">
-          <AppReproduction />
-        </div>
-        <div class="col-xs-12 col-sm-6 col-lg-4">
-          <AppReproduction />
+        <div v-for="reproduction in reproductions" class="col-xs-12 col-sm-6 col-lg-4">
+          <AppReproduction :reproduction="reproduction" />
         </div>
       </div>
     </div>
@@ -104,5 +99,22 @@ h2 {
 </style>
 
 <script setup lang="ts">
-import AppReproduction from './AppReproduction.vue'
+import AppReproduction from '@/components/AppReproduction.vue'
+
+import type { IReproduction } from '@/models/Reproduction'
+
+interface Props {
+  countries: string[] | null
+  activeCountry: string
+  reproductions: IReproduction[] | null
+}
+defineProps<Props>()
+
+const emit = defineEmits<{
+  (e: 'selectCountry', value: string): void
+}>()
+
+function selectCountry(country: string) {
+  emit('selectCountry', country)
+}
 </script>
