@@ -1,7 +1,7 @@
 import type { IFilter } from '@/models/Filters'
 import type { IReproduction } from '@/models/Reproduction'
 
-const URL = `${import.meta.env.VITE_API_URL}reproductions`
+const URL = `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/reproductions`
 
 export const getReproductions = async (filters: IFilter): Promise<IReproduction[]> => {
   let params = []
