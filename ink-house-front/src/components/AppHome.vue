@@ -1,5 +1,5 @@
 <template>
-  <AppHeader :items-in-cart="itemsInCart" />
+  <AppHeader :items-in-cart="itemsInCart.length" />
   <main>
     <AppHero />
     <AppReproductions
@@ -7,6 +7,7 @@
       :active-country="filters.country"
       :reproductions="reproductions"
       @select-country="selectCountry"
+      @add-to-cart="addToCart"
     />
 
     <AppNews />
@@ -31,10 +32,10 @@ import type { IFilter } from '@/models/Filters'
 import { getReproductions } from '@/api/getReproductions'
 import { getCountries } from '@/api/getCountries'
 
-const itemsInCart = ref(0)
 const filters = ref<IFilter>({ country: '', year: 0 })
 const reproductions = ref<IReproduction[] | null>(null)
 const countries = ref<string[] | null>(null)
+const itemsInCart = ref<string[]>([])
 
 onMounted(() => {
   loadCountries().then(() => {
@@ -62,6 +63,10 @@ const loadReproductions = async () => {
 function selectCountry(country: string) {
   filters.value.country = country
   loadReproductions()
+}
+
+function addToCart(id: string) {
+  itemsInCart.value.push(id)
 }
 </script>
 

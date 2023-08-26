@@ -22,8 +22,12 @@
         </div>
       </header>
       <div class="row reproductions">
-        <div v-for="reproduction in reproductions" class="col-xs-12 col-sm-6 col-lg-4">
-          <AppReproduction :reproduction="reproduction" />
+        <div
+          v-for="reproduction in reproductions"
+          :key="reproduction._id"
+          class="col-xs-12 col-sm-6 col-lg-4"
+        >
+          <AppReproduction :reproduction="reproduction" @add-to-cart="addToCart" />
         </div>
       </div>
     </div>
@@ -112,9 +116,14 @@ defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'selectCountry', value: string): void
+  (e: 'addToCart', value: string): void
 }>()
 
 function selectCountry(country: string) {
   emit('selectCountry', country)
+}
+
+function addToCart(id: string) {
+  emit('addToCart', id)
 }
 </script>

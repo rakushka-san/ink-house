@@ -5,7 +5,7 @@
     <h3 class="name">{{ reproduction.name }}</h3>
     <p class="properties">{{ reproduction.properties }}</p>
     <p class="price">{{ reproduction.price }} руб</p>
-    <button class="primary-btn">В корзину</button>
+    <button class="primary-btn" @click="addToCart(reproduction._id)">В корзину</button>
   </div>
 </template>
 
@@ -19,6 +19,14 @@ interface Props {
 defineProps<Props>()
 
 const API_URL = import.meta.env.VITE_API_URL
+
+const emit = defineEmits<{
+  (e: 'addToCart', value: string): void
+}>()
+
+function addToCart(id: string) {
+  emit('addToCart', id)
+}
 </script>
 
 <style lang="scss" scoped>
