@@ -13,12 +13,22 @@
             Высокое качество отрисовки на плотной бумаге или льняном холсте. Редкие произведения,
             доступные цены.
           </p>
-          <button class="primary-btn">Продукция</button>
+          <button class="primary-btn" @click="scrollToReproductions">Продукция</button>
         </div>
       </div>
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const emit = defineEmits<{
+  (e: 'scrollToReproductions'): void
+}>()
+
+function scrollToReproductions() {
+  emit('scrollToReproductions')
+}
+</script>
 
 <style lang="scss" scoped>
 @import './../assets/scss/colors';

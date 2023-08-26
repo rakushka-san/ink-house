@@ -28,9 +28,9 @@
           </div>
         </div>
         <nav class="row">
-          <a href="#" class="col-xs-12">Репродукции</a>
-          <a href="#" class="col-xs-12">Новинки</a>
-          <a href="#" class="col-xs-12">О нас</a>
+          <a href="#" class="col-xs-12" @click.prevent="scrollToReproductions">Репродукции</a>
+          <a href="#" class="col-xs-12" @click.prevent="scrollToNews">Новинки</a>
+          <a href="#" class="col-xs-12" @click.prevent="scrollToTeam">О нас</a>
         </nav>
       </div>
     </header>
@@ -44,9 +44,9 @@
         </div>
         <nav class="row between-xs middle-xs">
           <div class="col-sm-10">
-            <a href="#">Репродукции</a>
-            <a href="#">Новинки</a>
-            <a href="#">О нас</a>
+            <a href="#" @click.prevent="scrollToReproductions">Репродукции</a>
+            <a href="#" @click.prevent="scrollToNews">Новинки</a>
+            <a href="#" @click.prevent="scrollToTeam">О нас</a>
           </div>
           <div class="col-sm-2 cart">
             <a href="#">
@@ -67,9 +67,9 @@
             <AppLogo />
           </div>
           <nav class="col-md-9 col-lg-6">
-            <a href="#">Репродукции</a>
-            <a href="#">Новинки</a>
-            <a href="#">О нас</a>
+            <a href="#" @click.prevent="scrollToReproductions">Репродукции</a>
+            <a href="#" @click.prevent="scrollToNews">Новинки</a>
+            <a href="#" @click.prevent="scrollToTeam">О нас</a>
             <a href="#">
               <AppCart :items-in-cart="itemsInCart" />
               <!-- <img src="./../assets/img/shopping-cart.svg" alt="Cart" /> -->
@@ -100,6 +100,24 @@ function openMenu(): void {
 
 function closeMenu(): void {
   isMenuVisible.value = false
+}
+
+const emit = defineEmits<{
+  (e: 'scrollToReproductions'): void
+  (e: 'scrollToNews'): void
+  (e: 'scrollToTeam'): void
+}>()
+
+function scrollToReproductions() {
+  emit('scrollToReproductions')
+}
+
+function scrollToNews() {
+  emit('scrollToNews')
+}
+
+function scrollToTeam() {
+  emit('scrollToTeam')
 }
 </script>
 

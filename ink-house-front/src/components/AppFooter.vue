@@ -15,9 +15,17 @@
           </div>
           <div class="countries column col-xs-5 col-sm-4 col-md-3">
             <h4>Репродукции</h4>
-            <a href="#" class="silent">Франция</a>
+            <a
+              href="#"
+              class="silent"
+              v-for="country in countries"
+              :key="country"
+              @click.prevent="selectCountry(country)"
+              >{{ country }}</a
+            >
+            <!-- <a href="#" class="silent">Франция</a>
             <a href="#" class="silent">Германия</a>
-            <a href="#" class="silent">Англия</a>
+            <a href="#" class="silent">Англия</a> -->
           </div>
           <div class="years column col-xs-7 col-sm-4 col-md-3">
             <div>
@@ -28,8 +36,8 @@
           </div>
           <div class="team column col-xs-5 col-sm-4 col-md-3">
             <h4>О нас</h4>
-            <a href="#" class="silent">Художники</a>
-            <a href="#" class="silent">Менеджеры</a>
+            <a href="#" class="silent" @click.prevent="scrollToTeam">Художники</a>
+            <a href="#" class="silent" @click.prevent="scrollToTeam">Менеджеры</a>
           </div>
 
           <div class="end col-xs-12 col-md-3">
@@ -61,21 +69,37 @@
 
           <div class="countries column col-lg-2">
             <h4>Репродукции</h4>
-            <a href="#" class="silent">Франция</a>
+            <a
+              href="#"
+              class="silent"
+              v-for="country in countries"
+              :key="country"
+              @click.prevent="selectCountry(country)"
+              >{{ country }}</a
+            >
+            <!-- <a href="#" class="silent">Франция</a>
             <a href="#" class="silent">Германия</a>
-            <a href="#" class="silent">Англия</a>
+            <a href="#" class="silent">Англия</a> -->
           </div>
           <div class="years column col-lg-2">
             <div>
               <h4>Новинки</h4>
-              <a href="#" class="silent">2021</a>
-              <a href="#" class="silent">2020</a>
+              <a
+                href="#"
+                class="silent"
+                v-for="year in years"
+                :key="year"
+                @click.prevent="selectYear(year)"
+                >{{ year }}</a
+              >
+              <!-- <a href="#" class="silent">2021</a>
+              <a href="#" class="silent">2020</a> -->
             </div>
           </div>
           <div class="team column col-lg-2">
             <h4>О нас</h4>
-            <a href="#" class="silent">Художники</a>
-            <a href="#" class="silent">Менеджеры</a>
+            <a href="#" class="silent" @click.prevent="scrollToTeam">Художники</a>
+            <a href="#" class="silent" @click.prevent="scrollToTeam">Менеджеры</a>
           </div>
 
           <div class="end col-lg-2">
@@ -97,6 +121,38 @@
     </footer>
   </div>
 </template>
+
+<script setup lang="ts">
+import AppLogo from './AppLogo.vue'
+
+interface Props {
+  countries: string[] | null
+  years: number[] | null
+}
+
+defineProps<Props>()
+
+const emit = defineEmits<{
+  (e: 'scrollToTeam'): void
+  (e: 'scrollToReproductions'): void
+  (e: 'selectCountry', value: string): void
+  (e: 'selectYear', value: number): void
+}>()
+
+function scrollToTeam() {
+  emit('scrollToTeam')
+}
+
+function selectCountry(country: string) {
+  emit('selectCountry', country)
+  emit('scrollToReproductions')
+}
+
+function selectYear(year: number) {
+  emit('selectYear', year)
+  emit('scrollToReproductions')
+}
+</script>
 
 <style lang="scss" scoped>
 @import './../assets/scss/colors';
@@ -217,7 +273,3 @@ footer {
   color: $colorSilent;
 }
 </style>
-
-<script setup lang="ts">
-import AppLogo from './AppLogo.vue'
-</script>

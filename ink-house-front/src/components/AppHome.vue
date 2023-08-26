@@ -1,8 +1,14 @@
 <template>
-  <AppHeader :items-in-cart="itemsInCart.length" />
+  <AppHeader
+    :items-in-cart="itemsInCart.length"
+    @scroll-to-reproductions="scrollToReproductions"
+    @scroll-to-news="scrollToNews"
+    @scroll-to-team="scrollToTeam"
+  />
   <main>
-    <AppHero />
+    <AppHero @scroll-to-reproductions="scrollToReproductions" />
     <AppReproductions
+      ref="appReproductions"
       :countries="countries"
       :active-country="filters.country"
       :reproductions="reproductions"
@@ -10,10 +16,17 @@
       @add-to-cart="addToCart"
     />
 
-    <AppNews />
-    <AppTeam />
+    <AppNews ref="appNews" />
+    <AppTeam ref="appTeam" />
   </main>
-  <AppFooter />
+  <AppFooter
+    :countries="countries"
+    :years="years"
+    @select-country="selectCountry"
+    @select-year="selectYear"
+    @scroll-to-reproductions="scrollToReproductions"
+    @scroll-to-team="scrollToTeam"
+  />
 </template>
 
 <script setup lang="ts">
@@ -31,22 +44,37 @@ import type { IFilter } from '@/models/Filters'
 
 import { getReproductions } from '@/api/getReproductions'
 import { getCountries } from '@/api/getCountries'
+import { getYears } from '@/api/getYears'
 
 const filters = ref<IFilter>({ country: '', year: 0 })
 const reproductions = ref<IReproduction[] | null>(null)
 const countries = ref<string[] | null>(null)
+const years = ref<number[] | null>(null)
 const itemsInCart = ref<string[]>([])
+
+const appReproductions = ref<InstanceType<typeof AppReproductions> | null>(null)
+const appNews = ref<InstanceType<typeof AppNews> | null>(null)
+const appTeam = ref<InstanceType<typeof AppTeam> | null>(null)
 
 onMounted(() => {
   loadCountries().then(() => {
     loadReproductions()
   })
+  loadYears()
 })
 
 const loadCountries = async () => {
   try {
     countries.value = await getCountries()
     filters.value.country = countries.value[0]
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const loadYears = async () => {
+  try {
+    years.value = await getYears()
   } catch (err) {
     console.log(err)
   }
@@ -61,12 +89,31 @@ const loadReproductions = async () => {
 }
 
 function selectCountry(country: string) {
+  filters.value.year = 0
   filters.value.country = country
+  loadReproductions()
+}
+
+function selectYear(year: number) {
+  filters.value.country = ''
+  filters.value.year = year
   loadReproductions()
 }
 
 function addToCart(id: string) {
   itemsInCart.value.push(id)
+}
+
+function scrollToReproductions() {
+  appReproductions.value?.$el.scrollIntoView({ behavior: 'smooth' })
+}
+
+function scrollToNews() {
+  appNews.value?.$el.scrollIntoView({ behavior: 'smooth' })
+}
+
+function scrollToTeam() {
+  appTeam.value?.$el.scrollIntoView({ behavior: 'smooth' })
 }
 </script>
 
