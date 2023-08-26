@@ -56,9 +56,20 @@ const updateReproduciton = (req, res) => {
 		})
 }
 
+const getCountries = (req, res) => {
+	Reproduction.distinct('country')
+		.then(countries => {
+			res.status(200).json(countries)
+		})
+		.catch(err => {
+			res.status(500).json(error)
+		})
+}
+
 module.exports = {
 	getReproductions,
 	postReproduction,
 	deleteReproduction,
 	updateReproduciton,
+	getCountries,
 }
