@@ -31,4 +31,4 @@ const ReproductionSchema = new Schema({
 
 const Reproduction = mongoose.model('Reproduction', ReproductionSchema)
 
-module.exports = Reproduction
+module.exports = { Reproduction, ReproductionSchema }

@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 
 const reproductionsRoutes = require('./routes/reproductions-routes')
+const ordersRoutes = require('./routes/orders-routes')
 
 const app = express()
 
@@ -13,6 +14,7 @@ app.use(express.json())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(reproductionsRoutes)
+app.use(ordersRoutes)
 
 const { DB_HOST, DB_PORT, DB_NAME } = process.env
 

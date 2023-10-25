@@ -1,4 +1,4 @@
-const Reproduction = require('../models/reproduction')
+const { Reproduction } = require('../models/reproduction')
 
 const getReproductions = (req, res) => {
 	const limit = req.query.limit
