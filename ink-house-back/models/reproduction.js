@@ -19,10 +19,6 @@ const ReproductionSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	properties: {
-		type: String,
-		required: true,
-	},
 	price: {
 		type: Number,
 		required: true,
