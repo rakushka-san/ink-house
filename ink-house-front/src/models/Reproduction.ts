@@ -4,7 +4,6 @@ export interface IReproduction {
   author: string
   country: string
   imgSrc: string
-  properties: string
   price: number
   year: number
 }
