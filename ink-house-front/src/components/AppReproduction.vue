@@ -3,14 +3,16 @@
     <img :src="API_URL + reproduction.imgSrc" alt="Reproduction image" />
     <p class="author">{{ reproduction.author }}</p>
     <h3 class="name">{{ reproduction.name }}</h3>
-    <p class="properties">{{ reproduction.properties }}</p>
     <p class="price">{{ reproduction.price }} руб</p>
-    <button class="primary-btn" @click="addToCart(reproduction._id)">В корзину</button>
+    <button class="primary-btn" @click="orderStore.openAddToCart(reproduction._id)">
+      В корзину
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import type { IReproduction } from '@/models/Reproduction'
+import { useOrderStore } from '@/stores/OrderStore'
 
 interface Props {
   reproduction: IReproduction
@@ -18,20 +20,12 @@ interface Props {
 
 defineProps<Props>()
 
+const orderStore = useOrderStore()
+
 const API_URL = `${import.meta.env.VITE_API_URL}:${import.meta.env.VITE_API_PORT}/`
-
-const emit = defineEmits<{
-  (e: 'addToCart', value: string): void
-}>()
-
-function addToCart(id: string) {
-  emit('addToCart', id)
-}
 </script>
 
 <style lang="scss" scoped>
-@import './../assets/scss/colors';
-@import './../assets/scss/grid/mixins';
 .card {
   width: 100%;
   height: 100%;
@@ -75,16 +69,6 @@ function addToCart(id: string) {
 
     @include bp(md) {
       font-size: 1.875rem;
-    }
-  }
-
-  .properties {
-    margin-top: 0.62rem;
-    font-size: 1rem;
-
-    @include bp(md) {
-      margin-top: 0.5rem;
-      font-size: 1.125rem;
     }
   }
 

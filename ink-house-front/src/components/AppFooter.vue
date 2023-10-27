@@ -18,14 +18,11 @@
             <a
               href="#"
               class="silent"
-              v-for="country in countries"
+              v-for="country in reproductionStore.countries"
               :key="country"
-              @click.prevent="selectCountry(country)"
+              @click.prevent="selectCountryAndScroll(country)"
               >{{ country }}</a
             >
-            <!-- <a href="#" class="silent">Франция</a>
-            <a href="#" class="silent">Германия</a>
-            <a href="#" class="silent">Англия</a> -->
           </div>
           <div class="years column col-xs-7 col-sm-4 col-md-3">
             <div>
@@ -33,13 +30,11 @@
               <a
                 href="#"
                 class="silent"
-                v-for="year in years"
+                v-for="year in reproductionStore.years"
                 :key="year"
-                @click.prevent="selectYear(year)"
+                @click.prevent="selectYearAndScroll(year)"
                 >{{ year }}</a
               >
-              <!-- <a href="#" class="silent">2021</a>
-              <a href="#" class="silent">2020</a> -->
             </div>
           </div>
           <div class="team column col-xs-5 col-sm-4 col-md-3">
@@ -80,14 +75,11 @@
             <a
               href="#"
               class="silent"
-              v-for="country in countries"
+              v-for="country in reproductionStore.countries"
               :key="country"
-              @click.prevent="selectCountry(country)"
+              @click.prevent="selectCountryAndScroll(country)"
               >{{ country }}</a
             >
-            <!-- <a href="#" class="silent">Франция</a>
-            <a href="#" class="silent">Германия</a>
-            <a href="#" class="silent">Англия</a> -->
           </div>
           <div class="years column col-lg-2">
             <div>
@@ -95,13 +87,11 @@
               <a
                 href="#"
                 class="silent"
-                v-for="year in years"
+                v-for="year in reproductionStore.years"
                 :key="year"
-                @click.prevent="selectYear(year)"
+                @click.prevent="selectYearAndScroll(year)"
                 >{{ year }}</a
               >
-              <!-- <a href="#" class="silent">2021</a>
-              <a href="#" class="silent">2020</a> -->
             </div>
           </div>
           <div class="team column col-lg-2">
@@ -131,41 +121,36 @@
 </template>
 
 <script setup lang="ts">
-import AppLogo from './AppLogo.vue'
+import AppLogo from '@/components/AppLogo.vue'
+import { useReproductionStore } from '@/stores/ReproductionStore'
 
-interface Props {
-  countries: string[] | null
-  years: number[] | null
-}
-
-defineProps<Props>()
+const reproductionStore = useReproductionStore()
 
 const emit = defineEmits<{
   (e: 'scrollToTeam'): void
   (e: 'scrollToReproductions'): void
-  (e: 'selectCountry', value: string): void
-  (e: 'selectYear', value: number): void
 }>()
 
 function scrollToTeam() {
   emit('scrollToTeam')
 }
 
-function selectCountry(country: string) {
-  emit('selectCountry', country)
+function scrollToReproductions() {
   emit('scrollToReproductions')
 }
 
-function selectYear(year: number) {
-  emit('selectYear', year)
-  emit('scrollToReproductions')
+function selectCountryAndScroll(country: string) {
+  reproductionStore.selectCountry(country)
+  scrollToReproductions()
+}
+
+function selectYearAndScroll(year: number) {
+  reproductionStore.selectYear(year)
+  scrollToReproductions()
 }
 </script>
 
 <style lang="scss" scoped>
-@import './../assets/scss/colors';
-@import './../assets/scss/grid/mixins';
-
 footer {
   padding: 1.25rem 0;
   background-color: $colorPrimary;

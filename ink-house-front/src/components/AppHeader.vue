@@ -4,7 +4,7 @@
       <div class="top">
         <div class="container">
           <div class="row middle-xs center-xs">
-            <AppLogo />
+            <RouterLink to="/"><AppLogo /></RouterLink>
           </div>
         </div>
       </div>
@@ -15,8 +15,7 @@
             <img src="./../assets/img/list.svg" alt="Menu" @click="openMenu" />
           </div>
           <div class="col-xs-6 cart">
-            <AppCart :items-in-cart="itemsInCart" />
-            <!-- <img src="./../assets/img/shopping-cart.svg" alt="Cart" /> -->
+            <RouterLink to="/order"><AppCart /></RouterLink>
           </div>
         </div>
       </div>
@@ -40,7 +39,7 @@
     <header>
       <div class="container">
         <div class="row middle-xs center-xs">
-          <AppLogo />
+          <RouterLink to="/"><AppLogo /></RouterLink>
         </div>
         <nav class="row between-xs middle-xs">
           <div class="col-sm-10">
@@ -50,8 +49,7 @@
           </div>
           <div class="col-sm-2 cart">
             <a href="#">
-              <AppCart :items-in-cart="itemsInCart" />
-              <!-- <img src="./../assets/img/shopping-cart.svg" alt="Cart" /> -->
+              <RouterLink to="/order"><AppCart /></RouterLink>
             </a>
           </div>
         </nav>
@@ -64,15 +62,14 @@
       <div class="container">
         <div class="row between-md middle-md">
           <div class="col-md-3 col-lg-2">
-            <AppLogo />
+            <RouterLink to="/"><AppLogo /></RouterLink>
           </div>
           <nav class="col-md-9 col-lg-6">
             <a href="#" @click.prevent="scrollToReproductions">Репродукции</a>
             <a href="#" @click.prevent="scrollToNews">Новинки</a>
             <a href="#" @click.prevent="scrollToTeam">О нас</a>
             <a href="#">
-              <AppCart :items-in-cart="itemsInCart" />
-              <!-- <img src="./../assets/img/shopping-cart.svg" alt="Cart" /> -->
+              <RouterLink to="/order"><AppCart /></RouterLink>
             </a>
           </nav>
         </div>
@@ -82,15 +79,9 @@
 </template>
 
 <script setup lang="ts">
-import AppLogo from './AppLogo.vue'
-import AppCart from './AppCart.vue'
+import AppLogo from '@/components/AppLogo.vue'
+import AppCart from '@/components/AppCart.vue'
 import { ref } from 'vue'
-
-interface Props {
-  itemsInCart: number
-}
-
-defineProps<Props>()
 
 const isMenuVisible = ref(false)
 
@@ -122,9 +113,6 @@ function scrollToTeam() {
 </script>
 
 <style lang="scss" scoped>
-@import './../assets/scss/colors';
-@import './../assets/scss/grid/mixins';
-
 header {
   background-color: $colorPrimary;
 

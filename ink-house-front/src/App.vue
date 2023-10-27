@@ -1,11 +1,7 @@
 <template>
-  <Suspense>
-    <AppHome />
-  </Suspense>
+  <RouterView></RouterView>
 </template>
 
-<script setup lang="ts">
-import AppHome from './components/AppHome.vue'
-</script>
+<script setup lang="ts"></script>
 
 <style lang="scss"></style>

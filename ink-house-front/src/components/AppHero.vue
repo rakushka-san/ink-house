@@ -31,9 +31,6 @@ function scrollToReproductions() {
 </script>
 
 <style lang="scss" scoped>
-@import './../assets/scss/colors';
-@import './../assets/scss/grid/mixins';
-
 section {
   padding-top: 3.75rem;
 

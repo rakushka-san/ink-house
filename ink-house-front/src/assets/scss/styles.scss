@@ -121,3 +121,17 @@ h6,
 h7 {
   font-weight: 500;
 }
+
+button {
+  cursor: pointer;
+
+  &[disabled],
+  &[disabled]:hover,
+  &[disabled]:focus,
+  &[disabled]:active {
+    color: $colorSilent;
+    border: 1px solid $colorSilent;
+    background-color: transparent;
+    cursor: unset;
+  }
+}

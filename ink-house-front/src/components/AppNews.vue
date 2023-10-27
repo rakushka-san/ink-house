@@ -25,9 +25,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import './../assets/scss/colors';
-@import './../assets/scss/grid/mixins';
-
 section {
   padding: 3.12rem 0;
 

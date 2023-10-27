@@ -1,13 +1,19 @@
 <template>
   <div class="cart">
-    <div v-if="itemsInCart" class="counter">{{ itemsInCart }}</div>
+    <div v-if="orderStore.orderElements.length" class="counter">
+      {{ orderStore.orderElements.length }}
+    </div>
     <img src="./../assets/img/shopping-cart.svg" alt="Cart" />
   </div>
 </template>
 
-<style lang="scss" scoped>
-@import './../assets/scss/colors';
+<script setup lang="ts">
+import { useOrderStore } from '@/stores/OrderStore'
 
+const orderStore = useOrderStore()
+</script>
+
+<style lang="scss" scoped>
 .cart {
   position: relative;
 }
@@ -29,11 +35,3 @@
   text-align: center;
 }
 </style>
-
-<script setup lang="ts">
-interface Props {
-  itemsInCart: number
-}
-
-defineProps<Props>()
-</script>

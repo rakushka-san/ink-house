@@ -24,8 +24,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import './../assets/scss/grid/mixins';
-
 section {
   padding: 3.69rem 0 5.87rem;
 

@@ -6,38 +6,38 @@
         <div class="col-xs-12 col-md-8 col-lg-5">
           <div class="filters">
             <button
-              v-for="country in countries"
+              v-for="country in reproductionStore.countries"
               :key="country"
               class="tab-btn"
-              :class="{ active: activeCountry === country }"
-              @click="selectCountry(country)"
+              :class="{ active: reproductionStore.filters.country === country }"
+              @click="reproductionStore.selectCountry(country)"
             >
               {{ country }}
             </button>
-
-            <!-- <button class="tab-btn active">Франция</button>
-            <button class="tab-btn">Германия</button>
-            <button class="tab-btn">Англия</button> -->
           </div>
         </div>
       </header>
       <div class="row reproductions">
         <div
-          v-for="reproduction in reproductions"
+          v-for="reproduction in reproductionStore.reproductions"
           :key="reproduction._id"
           class="col-xs-12 col-sm-6 col-lg-4"
         >
-          <AppReproduction :reproduction="reproduction" @add-to-cart="addToCart" />
+          <AppReproduction :reproduction="reproduction" />
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<style lang="scss" scoped>
-@import './../assets/scss/colors';
-@import './../assets/scss/grid/mixins';
+<script setup lang="ts">
+import AppReproduction from '@/components/AppReproduction.vue'
+import { useReproductionStore } from '@/stores/ReproductionStore'
 
+const reproductionStore = useReproductionStore()
+</script>
+
+<style lang="scss" scoped>
 section {
   padding: 3.75rem 0;
 
@@ -101,29 +101,3 @@ h2 {
   }
 }
 </style>
-
-<script setup lang="ts">
-import AppReproduction from '@/components/AppReproduction.vue'
-
-import type { IReproduction } from '@/models/Reproduction'
-
-interface Props {
-  countries: string[] | null
-  activeCountry: string
-  reproductions: IReproduction[] | null
-}
-defineProps<Props>()
-
-const emit = defineEmits<{
-  (e: 'selectCountry', value: string): void
-  (e: 'addToCart', value: string): void
-}>()
-
-function selectCountry(country: string) {
-  emit('selectCountry', country)
-}
-
-function addToCart(id: string) {
-  emit('addToCart', id)
-}
-</script>

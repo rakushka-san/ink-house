@@ -6,7 +6,6 @@
 </template>
 
 <style lang="scss" scoped>
-@import './../assets/scss/colors';
 .logo {
   display: flex;
   align-items: center;
