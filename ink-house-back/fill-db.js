@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const path = require('path')
 const fs = require('fs')
 
-const Reproduction = require('./models/reproduction')
+const { Reproduction } = require('./models/reproduction')
 
 const reproductions = JSON.parse(
 	fs.readFileSync(
