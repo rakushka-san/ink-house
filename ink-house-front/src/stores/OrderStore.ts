@@ -5,6 +5,9 @@ import { useReproductionStore } from '@/stores/ReproductionStore'
 
 import type { IOrderElement } from '@/models/OrderElement'
 import type { IReproduction } from '@/models/Reproduction'
+import type { IOrder } from '@/models/Order'
+
+import { postOrder } from '@/api/postOrder'
 
 export const useOrderStore = defineStore('orderStore', () => {
   const reproductionStore = useReproductionStore()
@@ -56,6 +59,23 @@ export const useOrderStore = defineStore('orderStore', () => {
     orderElements.value.splice(index, 1)
   }
 
+  async function createOrder(
+    customerName: string,
+    customerSurname: string,
+    phoneNumber: string,
+    shippingAddress: string
+  ) {
+    const order: IOrder = {
+      customerName,
+      customerSurname,
+      phoneNumber,
+      shippingAddress,
+      orderList: orderElements.value
+    }
+
+    postOrder(order)
+  }
+
   return {
     orderElements,
     isAddToCartOpen,
@@ -66,6 +86,7 @@ export const useOrderStore = defineStore('orderStore', () => {
     openCreateOrder,
     closeCreateOrder,
     addToCart,
-    deleteFromCart
+    deleteFromCart,
+    createOrder
   }
 })
