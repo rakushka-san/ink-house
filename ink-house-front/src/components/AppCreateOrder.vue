@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="row center-xs">
-          <p class="error" v-if="validationError">Введите корректные данные</p>
+          <p class="error" v-if="error">{{ error }}</p>
         </div>
         <div class="row center-xs">
           <button class="primary-btn" @click="createOrder">Оформить заказ</button>
@@ -54,23 +54,39 @@ const customerSurname = ref('')
 const phoneNumber = ref('')
 const shippingAddress = ref('')
 
-const validationError = ref(false)
+const error = ref('')
 
 function validate() {
-  if (customerName.value.trim().length === 0) {
+  const nameRegExp = /^([А-Я][а-яё]*|[A-Z][a-z]*)$/
+
+  customerName.value = customerName.value.trim()
+  if (
+    customerName.value.length < 3 ||
+    customerName.value.length > 32 ||
+    !nameRegExp.test(customerName.value)
+  ) {
+    error.value = 'Введите корректное имя'
     return false
   }
 
-  if (customerSurname.value.trim().length === 0) {
+  customerSurname.value = customerSurname.value.trim()
+  if (
+    customerSurname.value.length < 3 ||
+    customerSurname.value.length > 32 ||
+    !nameRegExp.test(customerSurname.value)
+  ) {
+    error.value = 'Введите корректную фамилию'
     return false
   }
 
   const phoneNumberRegExp = /^((8|\+7)[\- ]?)?(\(?\d{3}\)?[\- ]?)?[\d\- ]{7,10}$/
   if (!phoneNumberRegExp.test(phoneNumber.value)) {
+    error.value = 'Введите корректный номер телефона'
     return false
   }
 
   if (shippingAddress.value.trim().length === 0) {
+    error.value = 'Введите адрес доставки'
     return false
   }
 
@@ -79,11 +95,10 @@ function validate() {
 
 function createOrder() {
   if (!validate()) {
-    validationError.value = true
     return
   }
 
-  validationError.value = false
+  error.value = ''
 
   orderStore.createOrder(
     customerName.value,
