@@ -1,5 +1,59 @@
 const { Reproduction } = require('../models/reproduction')
 
+const srcRegExp = /^(?:.*\.(?=(png|jpg|jpeg)$))?[^.]*$/i
+const yearRegExp = /^[1-9][0-9]{3}$/
+
+function validateReproduction(data, res) {
+	if (data.hasOwnProperty('name')) {
+		if (typeof data.name !== 'string') {
+			res.status(400).json('name must be a string')
+			return false
+		}
+		data.name = data.name.trim()
+	}
+
+	if (data.hasOwnProperty('author')) {
+		if (typeof data.author !== 'string') {
+			res.status(400).json('author must be a string')
+			return false
+		}
+		data.author = data.author.trim()
+	}
+
+	if (data.hasOwnProperty('country')) {
+		if (typeof data.country !== 'string') {
+			res.status(400).json('country must be a string')
+			return false
+		}
+		data.country = data.country.trim()
+	}
+
+	if (data.hasOwnProperty('imgSrc')) {
+		if (typeof data.imgSrc !== 'string') {
+			res.status(400).json('imgSrc must be a string')
+			return false
+		}
+		data.imgSrc = data.imgSrc.trim()
+	}
+
+	if (!srcRegExp.test(data.imgSrc)) {
+		res.status(400).json('imgSrc must be either .png, .jpg or .jpeg extension')
+		return false
+	}
+
+	if (data.price <= 0) {
+		res.status(400).json('Price must be more than 0')
+		return false
+	}
+
+	if (!yearRegExp.test(data.year)) {
+		res.status(400).json('Year must be in range of 1000 and 9999')
+		return false
+	}
+
+	return true
+}
+
 const getReproductions = (req, res) => {
 	const limit = req.query.limit
 	const skip = req.query.skip
@@ -24,7 +78,11 @@ const getReproductions = (req, res) => {
 }
 
 const postReproduction = (req, res) => {
-	const reproduction = new Reproduction(req.body)
+	const body = req.body
+
+	if (!validateReproduction(body, res)) return
+
+	const reproduction = new Reproduction(body)
 
 	reproduction
 		.save()
@@ -47,7 +105,11 @@ const deleteReproduction = (req, res) => {
 }
 
 const updateReproduciton = (req, res) => {
-	Reproduction.findByIdAndUpdate(req.params.id, req.body)
+	const body = req.body
+
+	if (!validateReproduction(body, res)) return
+
+	Reproduction.findByIdAndUpdate(req.params.id, body)
 		.then(result => {
 			res.status(200).json(result)
 		})
