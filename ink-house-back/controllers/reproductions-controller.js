@@ -23,6 +23,16 @@ const getReproductions = (req, res) => {
 		})
 }
 
+const getReproduction = (req, res) => {
+	Reproduction.findById(req.params.id)
+		.then(reproductions => {
+			res.status(200).json(reproductions)
+		})
+		.catch(err => {
+			res.status(500).json(err)
+		})
+}
+
 const postReproduction = (req, res) => {
 	const reproduction = new Reproduction(req.body)
 
@@ -77,6 +87,7 @@ const getYears = (req, res) => {
 }
 
 module.exports = {
+	getReproduction,
 	getReproductions,
 	postReproduction,
 	deleteReproduction,

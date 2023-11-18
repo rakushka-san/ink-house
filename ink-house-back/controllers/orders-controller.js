@@ -10,6 +10,16 @@ const getOrders = (req, res) => {
 		})
 }
 
+const getOrder = (req, res) => {
+	Order.findById(req.params.id)
+		.then(orders => {
+			res.status(200).json(orders)
+		})
+		.catch(err => {
+			res.status(500).json(err)
+		})
+}
+
 const postOrder = (req, res) => {
 	const order = new Order(req.body)
 
@@ -23,7 +33,30 @@ const postOrder = (req, res) => {
 		})
 }
 
+const deleteOrder = (req, res) => {
+	Order.findByIdAndDelete(req.params.id)
+		.then(result => {
+			res.status(204).json(result)
+		})
+		.catch(err => {
+			res.status(500).json(err)
+		})
+}
+
+const updateOrder = (req, res) => {
+	Order.findByIdAndUpdate(req.params.id, req.body)
+		.then(result => {
+			res.status(200).json(result)
+		})
+		.catch(err => {
+			res.status(500).json(err)
+		})
+}
+
 module.exports = {
+	getOrder,
 	getOrders,
 	postOrder,
+	deleteOrder,
+	updateOrder,
 }
